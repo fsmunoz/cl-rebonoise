@@ -10,6 +10,38 @@ The first goal is to cover the same functionality as the interactive
 demo; future versions can eventually address other aspects like
 biomes or forcing islands.
 
+
+## Installation
+
+The package can be loaded using `quicklisp`. [ABCL](https://common-lisp.net/project/armedbear/) and [SBCL](http://www.sbcl.org/) have been tested, others should "just work" as long as the depencies are available (`black-tie` and `zpng`, plus their dependencies).
+
+```common-lisp
+Armed Bear Common Lisp 1.8.0
+Java 17.0.1 Debian
+OpenJDK 64-Bit Server VM
+Low-level initialization completed in 0.127 seconds.
+Startup completed in 0.669 seconds.
+Type ":help" for a list of available commands.
+(ql:quickload 'cl-rebonoise)
+To load "cl-rebonoise":
+  Load 1 ASDF system:
+    cl-rebonoise
+; Loading "cl-rebonoise"
+[package black-tie]...............................
+[package impl-specific-gray]......................
+[package trivial-gray-streams]....................
+[package salza2]..................................
+[package zpng]....................................
+[package cl-rebonoise]
+(CL-REBONOISE)
+(in-package cl-rebonoise)
+
+#<PACKAGE CL-REBONOISE>
+(elevation 10 20)
+
+0.6721937
+```
+
 ## How to use it
 
 There are two main entry points to the library:
@@ -118,7 +150,7 @@ Biomes map colors to elevation; using different settings we can get a more fores
 * Biome support is very basic: moisture influence (as per the original page) should be added and a more robust configuration mechanism implemented.
 * Island mode: forcing maps to islands via shaping.
 * Ridged noise and terraces
-
+* 
 ## License
 
 This program is free software: you can redistribute it and/or modify
