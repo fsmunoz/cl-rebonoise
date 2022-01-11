@@ -1,5 +1,7 @@
 # cl-rebonoise
 
+![Logo](cl-rebonoise-logo.png?raw=true)
+
 This is an implementation of Amit Patel's [Making maps with noise
 functions](https://www.redblobgames.com/maps/terrain-from-noise/),
 using Simplex Noise (through `black tie`).
