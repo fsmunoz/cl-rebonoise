@@ -38,6 +38,85 @@ since it makes such a different visually it's included via a
 customisable association list of colours and an option in
 `grid-to-file`.
 
+## Walkthrough
+
+(This content is also in `examples/create-map.lisp` for interactive explorarion).
+
+### Single octave
+Single octave, 500x500; we override the defaults since they are set to produce multiple octaves
+
+```common-lisp
+(grid-to-file 500 500 "./examples/img/1-single-pass.png" :coefs '((1 1)))
+```
+![Single pass](examples/img/1-single-pass.png?raw=true)
+
+### Default octaves
+Using the defaults, 3 octaves are used, producing noise at different frequencies.
+
+```common-lisp
+(grid-to-file 500 500 "./examples/img/2-three-octaves.png")
+```
+![Octaves](examples/img/2-three-octaves.png?raw=true)
+
+### Offset
+
+The same but using a small offset: it's almost the same as the previous one but moved slightly. Higher offset values will pick up a different noise space.
+
+```common-lisp
+(grid-to-file 500 500 "./examples/img/3-offset.png" :offset -0.6)
+```
+![Offset](examples/img/3-offset.png?raw=true)
+
+
+### More octaves
+
+More octaves result in more interesting terrain features.
+```common-lisp
+(grid-to-file 500 500 "./examples/img/4-more-octaves.png" :coefs '((1 1) (2 0.5) (4 0.25) (8 0.125) (16 0.0625)))
+```
+![More octaves](examples/img/4-more-octaves.png?raw=true)
+
+
+### Redistribution
+
+Using a different `power` will redistribute middle values, creating more abrupt "valleys".
+
+
+```common-lisp
+(grid-to-file 500 500 "./examples/img/5-noise1.png" :coefs '((1 1) (2 0.5) (4 0.25) (8 0.125) (16 0.0625)) :power 2)
+```
+![Redistribution](examples/img/5-noise1.png?raw=true)
+
+
+### Custom frequency, amplitudes and number of octaves
+Different values can be used for each "octave" amplitude and frequency; playing with them and the rest produces different maps, obviouly.
+
+```common-lisp
+(grid-to-file 500 500 "./examples/img/6-coefs.png" :coefs '((1 3) (3 1) (4 1.25) (8 0.3) ) :power 1.5 :offset 10)
+```
+![Custom octaves](examples/img/6-coefs.png?raw=true)
+
+### Biomes
+
+Biomes map colors to elevation; using different settings we can get a more forest-heavy landmass.
+```common-lisp
+(grid-to-file 500 500 "./examples/img/7-biome1.png" :coefs '((1 1) (2 1) (4 8) (18 2) ) :power 0.75 :offset 90 :biomes t)
+```
+![Biome land](examples/img/7-biome1.png?raw=true)
+
+... or a more island-like map.
+
+```common-lisp
+(grid-to-file 500 500 "./examples/img/7-biome2.png" :coefs '((1 6) (2 11) (4 8) (18 2) ) :power 1.45 :offset 166 :biomes t)
+```
+![Biome islands](examples/img/7-biome2.png?raw=true)
+
+## TODO
+
+* Biome support is very basic: moisture influence (as per the original page) should be added and a more robust configuration mechanism implemented.
+* Island mode: forcing maps to islands via shaping.
+* Ridged noise and terraces
+
 ## License
 
 This program is free software: you can redistribute it and/or modify
